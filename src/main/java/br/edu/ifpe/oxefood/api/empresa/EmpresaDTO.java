@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmpresaDTO {
-
-    private Long id;
-
+    
     private String site;
 
     private String cnpj;
@@ -24,5 +22,4 @@ public class EmpresaDTO {
     private String fone;
 
     private String foneAlternativo;
-
 }

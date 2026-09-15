@@ -13,13 +13,13 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "Empresa")
-@SQLRestriction("habilitado = true")
+@SQLRestriction("habilitado = true")    
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Empresa extends EntidadeAuditavel {
-
+    
     @Column
     private String site;
 
@@ -40,5 +40,4 @@ public class Empresa extends EntidadeAuditavel {
 
     @Column
     private String foneAlternativo;
-
 }

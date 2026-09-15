@@ -1,5 +1,7 @@
 package br.edu.ifpe.oxefood.api.cliente;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -10,7 +12,7 @@ public class ClienteService {
     private final ClienteRepository repository;
 
     public ClienteService(ClienteRepository repository) {
-        this.repository = repository;
+       this.repository = repository;
     }
 
     public Cliente build(ClienteDTO dto) {
@@ -32,4 +34,15 @@ public class ClienteService {
         cliente.setHabilitado(true);
         return repository.save(cliente);
     }
+
+    public List<Cliente> listar() {
+
+        return repository.findAll();
+    }
+
+    public Cliente buscarPorId(Long id) {
+
+        return repository.findById(id).get();
+    }
+
 }

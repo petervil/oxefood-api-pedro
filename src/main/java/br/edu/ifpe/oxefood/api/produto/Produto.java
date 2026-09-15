@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "Produto")
-@SQLRestriction("habilitado = true")
+@SQLRestriction("habilitado = true")  
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,5 +37,5 @@ public class Produto extends EntidadeAuditavel {
 
     @Column
     private Integer tempoEntregaMaximo;
-
+    
 }
