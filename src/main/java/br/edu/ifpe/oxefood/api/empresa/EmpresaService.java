@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class EmpresaService {
-    
+
     private final EmpresaRepository repository;
 
     public EmpresaService(EmpresaRepository repository) {
@@ -37,6 +37,15 @@ public class EmpresaService {
         return repository.save(empresa);
     }
 
+    @Transactional
+    public void remover(Long id) {
+
+        Empresa empresa = repository.findById(id).get();
+        empresa.setHabilitado(false);
+
+        repository.save(empresa);
+    }
+
     public List<Empresa> listar() {
 
         return repository.findAll();
@@ -46,4 +55,5 @@ public class EmpresaService {
 
         return repository.findById(id).get();
     }
+
 }

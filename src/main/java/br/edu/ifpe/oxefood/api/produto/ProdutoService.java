@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class ProdutoService {
-    
+
     private final ProdutoRepository repository;
 
     public ProdutoService(ProdutoRepository repository) {
@@ -33,7 +33,16 @@ public class ProdutoService {
         Produto produto = build(dto);
         produto.setHabilitado(true);
         return repository.save(produto);
-    } 
+    }
+
+    @Transactional
+    public void remover(Long id) {
+
+        Produto produto = repository.findById(id).get();
+        produto.setHabilitado(false);
+
+        repository.save(produto);
+    }
 
     public List<Produto> listar() {
 
