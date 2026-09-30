@@ -17,7 +17,17 @@ public class EmpresaService {
 
     public Empresa build(EmpresaDTO dto) {
 
-        Empresa empresa = new Empresa();
+        Empresa empresa = null;
+
+        if (dto.getId() == null) { // Montado para o cadastro
+
+            empresa = new Empresa();
+
+        } else { // Consultado para a alteração
+
+            empresa = repository.findById(dto.getId()).get();
+        }
+
         empresa.setSite(dto.getSite());
         empresa.setCnpj(dto.getCnpj());
         empresa.setInscricaoEstadual(dto.getInscricaoEstadual());
@@ -34,6 +44,13 @@ public class EmpresaService {
 
         Empresa empresa = build(dto);
         empresa.setHabilitado(true);
+        return repository.save(empresa);
+    }
+
+    @Transactional
+    public Empresa atualizar(EmpresaDTO dto) {
+
+        Empresa empresa = build(dto);
         return repository.save(empresa);
     }
 

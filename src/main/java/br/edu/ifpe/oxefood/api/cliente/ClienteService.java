@@ -12,12 +12,22 @@ public class ClienteService {
     private final ClienteRepository repository;
 
     public ClienteService(ClienteRepository repository) {
-       this.repository = repository;
+        this.repository = repository;
     }
 
     public Cliente build(ClienteDTO dto) {
 
-        Cliente cliente = new Cliente();
+        Cliente cliente = null;
+
+        if (dto.getId() == null) { // Montado para o cadastro
+
+            cliente = new Cliente();
+
+        } else { // Consultado para a alteração
+
+            cliente = repository.findById(dto.getId()).get();
+        }
+
         cliente.setNome(dto.getNome());
         cliente.setDataNascimento(dto.getDataNascimento());
         cliente.setCpf(dto.getCpf());
@@ -35,6 +45,13 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
+    @Transactional
+    public Cliente atualizar(ClienteDTO dto) {
+
+        Cliente cliente = build(dto);
+        return repository.save(cliente);
+    }
+
     public List<Cliente> listar() {
 
         return repository.findAll();
@@ -46,13 +63,12 @@ public class ClienteService {
     }
 
     @Transactional
-   public void remover(Long id) {
+    public void remover(Long id) {
 
         Cliente cliente = repository.findById(id).get();
         cliente.setHabilitado(false);
 
         repository.save(cliente);
-   }
-
+    }
 
 }
